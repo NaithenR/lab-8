@@ -14,6 +14,9 @@ class Vehicle(ABC):
         self._energy = 100
 
     @property
+    def name(self):
+        return self._name
+    @property
     def initial(self):
         return self._initial
 
