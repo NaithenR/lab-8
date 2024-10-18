@@ -14,9 +14,6 @@ class Vehicle(ABC):
         self._energy = 100
 
     @property
-    def name(self):
-        return self._name
-    @property
     def initial(self):
         return self._initial
 
@@ -31,27 +28,26 @@ class Vehicle(ABC):
     def fast(self, dist): 
         if self._energy >= 5:
             spaces_moved = random.randint(self._min_speed, self._max_speed)
-            if spaces_moved >= dist:
+            self._energy -= 5
+            if spaces_moved < dist:
                 self._position += spaces_moved
-                self._energy -= 5
-                return f"{self._name} moved {spaces_moved} spaces and crashed into the obstacle."
+                return f"{self._name} quickly moves {spaces_moved} units!"
             else:
-                self._position = dist - 1
-                return f"{self._name} moved {spaces_moved} spaces."
-        else: 
-            return f"{self._name} does not have enough energy to move fast."
+                self._position = (dist-1)
+                return f"{self._name} crashes in an obstacle!"
+        return f"{self._name} does not have enough energy to move fast."
 
     def slow(self, dist): 
         half_speed = (self._min_speed + self._max_speed) // 2
-        if half_speed >= dist:
-            self._position += dist
-            return f"{self._name} moved {half_speed} spaces and went around the obstacle."
-        else:
+        if half_speed < dist:
             self._position += half_speed
-            return f"{self._name} moved {half_speed} spaces."
+            return f"{self._name} slowly moves {half_speed} units."
+        else:
+            self._position += (dist - 1)
+            return f"{self._name} safely moves around the obstacle."
 
     def __str__(self):
-        return f"Vehicle: {self._name}, Position: {self._position}, Energy: {self._energy}"
+        return f"{self._name} [Position - {self._position}, Energy - {self._energy}"
 
     @abstractmethod
     def description_string(self):
