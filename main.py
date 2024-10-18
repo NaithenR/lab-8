@@ -36,9 +36,9 @@ def main():
     finished_vehicles = []
 
     while len(finished_vehicles) < 3:
-        print(f"\n{player.name} [Position - {player.position}, Energy - {player.energy}]")
+        print(f"\n{player._name} [Position - {player.position}, Energy - {player.energy}]")
         for opponent in opponents:
-            print(f"{opponent.name} [Position - {opponent.position}, Energy - {opponent.energy}]")
+            print(f"{opponent._name} [Position - {opponent.position}, Energy - {opponent.energy}]")
 
         for i, lane in enumerate(track):
             lane_display = lane[:]
@@ -99,7 +99,7 @@ def main():
     print("\nRace Over! Final Results:")
     for i, vehicle in enumerate(finished_vehicles):
         place = ["1st", "2nd", "3rd"][i]
-        print(f"{place} place: {vehicle.name} [Position: {vehicle.position}]")
+        print(f"{place} place: {vehicle._name} [Position: {vehicle.position}]")
 
 if __name__ == "__main__":
     main()
